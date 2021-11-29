@@ -1,0 +1,326 @@
+{% load static %}
+{% load blog_custom_tags %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--
+
+Grill Template
+
+http://www.templatemo.com/free-website-templates/417-grill
+
+-->
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}</title>
+
+
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="description" content="All about meta tags and how to add them to your website.">
+        <meta name="keywords" content="yummy, funny, yummy&funny, yummyandfunny, yummyandfunny resturant, food yummyandfunny, blog yummyandfunny, food blog, blogging website, food blogging, food website yummyandfunny, blogging website yummyandfunny, yummyandfunny.xyz, restaurant yummyandfunny, food yummyandfunny, blogging site yummyandfunny, best food, best blog, best restaurant, restaurant yummyandfunny, news food, all food, yummyandfunny, myblog, delicious food site, food blogging,food blogging 2020,food blogging tips,food blog,food blogger,food blogging secrets,food blogging tutorial,food blogging equipment,food blogging for beginners,start food blog,food styling tips,start a food blog,starting food blog,making a food blog,instagram food blogger,need as a food blogger,wordpress food blog,setting up food blog,funny food,funny cooking,amazing food videos,mouth watering food,tasty food,funny,satisfying food videos,learn for toddler,tasty street food,tasty food videos,learn colors,seafood asmr,seafood,so yummy,hapatite foods,catch and cook,instagram food reels,food asmr,shapes for kids,chinese eating seafood,food,tiktok food,seafood boil,awesome food,learn for preschooler,seafood mukbang,chinese cooking videos,learn kids games,food hackstarting a food blog,creating a food blog,how to become a food blogger,wordpress, food blog, tutorial,meta tags, meta description, meta keywords, SEO, search engine optimization,best food websites,food website,best food web design,best websites,top 5 food websites,top 5 websites,food web design,food business,food and restaurant website,restaurant website design,restaurant promotion ideas,restaurant promotion,restaurant marketing strategies,restaurant marketing ideas,restaurant marketing,restaurant management,how to market a restaurant business,increase restaurant sales,how to do restaurant marketing,small business marketing">
+
+
+
+
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <link rel="stylesheet" href="{% static '' %}css/bootstrap.css">
+        <link rel="stylesheet" href="{% static '' %}css/font-awesome.css">
+        <link rel="stylesheet" href="{% static '' %}css/templatemo_style.css">
+        <link rel="stylesheet" href="{% static '' %}css/templatemo_misc.css">
+        <link rel="stylesheet" href="{% static '' %}css/flexslider.css">
+        <link rel="stylesheet" href="{% static '' %}css/testimonails-slider.css">
+        <link rel="icon" href="{% static 'default-monochrome.svg' %}" type="{% static 'default-monochrome.svg' %}">
+        <script src="{% static '' %}js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+
+            <header>
+
+                <div id="top-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="home-account">
+
+                                    <a href="{% url 'my_account' %}" style="color:#F99720;">My account</a>
+
+                                    {% if user.is_authenticated %}
+                                    <a href="{% url 'logout_func' %}" style="color:#F99720;">
+                                        Logout({% if request.user.first_name %}{{request.user.first_name| truncatechars:10}}{% else %}{{request.user.email| truncatechars:10}}{% endif %})
+                                    </a>
+
+                                    {% else %}
+                                    <a href="{% url 'signup_login' %}" style="color:#F99720;">Login/Signup</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="cart-info">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    (<span style="color:#F99720;"><span id="showitem">0</span> items</span>) in your cart ($<span id="show_price_sum" style="color:#F99720;">0</span>)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="main-header">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="logo" style="padding:0 0">
+                                    <a href="{% url 'index' %}"><img src="{% static 'default-monochrome.svg' %}" title="Grill Template" alt="Grill Website Template" width="110" height="100"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="main-menu">
+                                    <ul>
+                                        <li><a href="{% url 'index' %}">Home</a></li>
+                                        <li><a href="{% url 'shop' %}">Shop</a></li>
+                                        <li><a href="{% url 'lifestyle' %}">Lifestyle</a></li>
+                                        <li><a href="{% url 'travel_adventure' %}">Travel Adventures</a></li>
+                                        <li><a href="{% url 'all_blogs' %}">All Blogs ({% count_blogs %})</a></li>
+                                        <li><a href="{% url 'mycart_checkout' %}">
+                                            <i class="fa fa-shopping-cart" style="font-size:22px"><sup style="margin-left:-1px; background-color:#F88B35; font-family:'Barlow'; font-weight:500;p" class="badge" id="product_cart">0</sup></i>
+                                        </a></li>
+
+
+
+<!--                                        <li><a href="contact-us.html">Contact</a></li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="search-box">
+                                    <form method="GET" class="search_form" action="{% url 'search_blog' %}">
+                                        <input id="search" type="text" name="search_value" />
+                                        <input type="submit" id="search-button"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+        {% if messages %}
+
+            <div class="alert alert-success container" role="alert">
+              {% for m in messages %}
+                {{m}}
+              {% endfor %}
+            </div>
+        {% endif %}
+
+            {% block content %}{% endblock %}
+
+            <footer>
+                <div class="container">
+                    <div class="top-footer">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="subscribe-form">
+                                    <span>Get in touch with us</span>
+                                    <form method="POST" class="subscribeForm" action="{% url 'get_in_touch_url' %}">{% csrf_token %}
+                                        <input id="subscribe" type="email" name="get_email_touch" required/>
+                                        <input type="submit" id="submitButton" />
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="social-bottom">
+                                    <span>Follow us:</span>
+                                    <ul>
+                                        <li><a target="_blank" href="https://www.facebook.com/profile.php?id=100074605974764" class="fa fa-facebook"></a></li>
+                                        <li><a target="_blank" href="https://mobile.twitter.com/YummyFunny21" class="fa fa-twitter"></a></li>
+                                        <li><a target="_blank" href="https://www.instagram.com/yummyfunny8/?hl=en" class="fa fa-instagram"></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="about">
+                                    <h4 class="footer-title">About Yummy&Funny</h4>
+                                    <p>Yummy&Funny is a <span class="blue">Resturant Blogging website</span> and it is a free responsive bootstrap layout that can be applied for any purpose.
+                                    <br><br>Please Visit Our Website and give us your feedback. Thank you so much</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="shop-list">
+                                    <h4 class="footer-title">Yummy&Funnny Cusinis Categories</h4>
+                                    <ul>
+                                        <li><a href="https://nour23450118.wordpress.com/american-cuisines/" target="_blank"><i class="fa fa-angle-right"></i>American Cuisine</a></li>
+                                        <li><a href="https://nour23450118.wordpress.com/indian-cuisine/"target="_blank"><i class="fa fa-angle-right"></i>Indian Cuisine</a></li>
+                                        <li><a href="https://nour23450118.wordpress.com/asian-cuisine/"target="_blank"><i class="fa fa-angle-right"></i>Asian Cuisine</a></li>
+                                        <li><a href="https://nour23450118.wordpress.com/mediterranean-cuisines/"target="_blank"><i class="fa fa-angle-right"></i>Mediterranean Cuisine</a></li>
+                                        <li><a href="https://nour23450118.wordpress.com/european-cuisine/"target="_blank"><i class="fa fa-angle-right"></i>European Cuisine</a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <h4 class="footer-title">Recent posts</h4>
+                                <div class="recent-posts" id="show_latest_blg">
+
+<!--                                    <div class="recent-post">-->
+<!--                                        <div class="recent-post-thumb">-->
+<!--                                            <img src="{% static '' %}images/recent-post1.jpg" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="recent-post-info">-->
+<!--                                            <h6><a href="{% url 'all_blogs' %}">Delicious and Healthy Menus</a></h6>-->
+<!--                                            <span>24/12/2084</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="recent-post">-->
+<!--                                        <div class="recent-post-thumb">-->
+<!--                                            <img src="{% static '' %}images/recent-post2.jpg" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="recent-post-info">-->
+<!--                                            <h6><a href="{% url 'all_blogs' %}">Simple and effective meals</a></h6>-->
+<!--                                            <span>18/12/2084</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="more-info">
+                                    <h4 class="footer-title">More info</h4>
+                                    <p>Yummy&Funny is a is free for everyone. Anyone can come and read any blog.
+                                    <br><br>Please Visit Our Website and give us your feedback. Thank you so much</p>
+                                    <ul>
+                                        <li><i class="fa fa-phone"></i>010-020-0340</li>
+                                        <li><i class="fa fa-globe"></i>123 Dagon Studio, Yakin Street, Digital Estate</li>
+                                        <li><i class="fa fa-envelope"></i><a href="#">info@yummyandfunny.xyz</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-footer">
+                        <p>
+                        	<span>Copyright © 2021 <a href="{% url 'index' %}">Yummy&Funny</a>
+                            </span>
+                        </p>
+                    </div>
+
+                </div>
+            </footer>
+
+
+        <script src="{% static '' %}js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="{% static '' %}js/vendor/jquery.gmap3.min.js"></script>
+        <script src="{% static '' %}js/plugins.js"></script>
+        <script src="{% static '' %}js/main.js"></script>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+
+   <script>
+
+
+        console.log('working');
+        if (localStorage.getItem('product_cart')==null){
+            var product_cart={};
+            console.log('none')
+        }
+        else{
+            product_cart = JSON.parse(localStorage.getItem('product_cart'));
+            console.log(product_cart)
+            updateCart(product_cart)
+        }
+
+
+        $.ajax({
+            url : '{% url 'last_2_blogs' %}',
+            type : 'POST',
+
+        })
+        .done(function(response){
+        console.log(response)
+
+        var prod = JSON.parse(response);
+        var len = prod.length;
+
+
+        let product_list = [];
+        search_result = ``
+
+        for(var i=0;i<len;i++){
+            var titles = JSON.stringify(prod[i].fields.title);
+            var titles2 = titles.slice(0, -1)
+            var titles3 = titles2.slice(1);
+            console.log(titles3)
+
+            var imgss = JSON.stringify(prod[i].fields.img);
+            var imgss2 = imgss.slice(0, -1)
+            var imgss3 = imgss2.slice(1);
+            console.log(imgss3)
+
+            var timess = JSON.stringify(prod[i].fields.time);
+            var timess2 = timess.slice(0, -11)
+            var timess3 = timess2.slice(1);
+            console.log(timess3)
+
+            var cat_pk = JSON.stringify(prod[i].pk);
+            console.log(cat_pk)
+
+            search_result = search_result + `<div class="recent-post">
+                                        <div class="recent-post-thumb">
+                                            <img src="/media/${imgss3}" alt="" style="width:100%">
+                                        </div>
+                                        <div class="recent-post-info">
+                                            <h6><a href="/blog_details/${cat_pk}">${titles3}</a></h6>
+                                            <span>${timess3}</span>
+                                        </div>
+                                    </div>`
+
+
+
+        }
+        console.log(search_result)
+        document.getElementById('show_latest_blg').innerHTML = search_result;
+
+        })
+
+
+
+
+
+
+
+
+
+        function updateCart(product_cart){
+            var sum = 0;
+            var price_sum = 0;
+            for (var item in product_cart){
+
+                sum = sum + product_cart[item][0];
+
+                price_sum = price_sum + product_cart[item][2];
+            }
+            localStorage.setItem('product_cart', JSON.stringify(product_cart))
+            document.getElementById('product_cart').innerHTML = sum;
+            document.getElementById('showitem').innerHTML = sum;
+            document.getElementById('show_price_sum').innerHTML = price_sum;
+
+        }
+
+
+    </script>
+
+    </body>
+</html>

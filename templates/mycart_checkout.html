@@ -1,0 +1,227 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+
+
+<div id="product-post" xmlns="http://www.w3.org/1999/html">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-section">
+                                <h2>{% if user.is_authenticated %}My Checkout{% else %}Checkout With SignUp{% endif %}</h2>
+                                <img src="{% static '' %}images/under-heading.png" alt="" >
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contact-us">
+                        <div class="container">
+                            <div class="row">
+                                <div class="product-item col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+
+
+                                            <div class="recent-post">
+                                                <h2 style="background-color:#F88B35; font-family:'Barlow'; font-weight:500;p; font-size:20px; width:80%;" class="badge"><b>My Cart Products</b> ($<span id="sho_total_price"></span>)</h2>
+                                                    <div class="posts" id="cart_prds">
+
+
+
+
+                                                    </div>
+                                                </div>
+
+
+                                        </div>
+
+
+
+                                        <div class="col-md-8">
+                                            {% if erorr_message %}
+                                            <div class="alert alert-danger" role="alert">
+                                              {{erorr_message}}
+                                            </div>
+                                            {% endif %}
+                                            <div class="message-form">
+
+
+                                                    <div class="row">
+                                                        <div class="name col-md-6">
+                                                            <input type="text" name="f_name" id="frs_nam" placeholder="First Name" value="{{request.user.first_name}}" />
+                                                        </div>
+                                                        <div class="email col-md-6">
+                                                            <input type="text" name="l_name" id="ls_nam" placeholder="Last Name" value="{{request.user.last_name}}" />
+                                                        </div>
+                                                        <div class="subject col-md-12" style="margin-top:20px; margin-bottom:20px">
+                                                            <input type="email" name="r_email" id="ch_eml" placeholder="Email" value="{{request.user.email}}" />
+                                                        </div>
+
+                                                        <div class="subject col-md-12">
+                                                            <input type="number" name="r_email" id="phn_num" placeholder="Phone Number" />
+                                                        </div>
+
+                                                        <div class="subject col-md-12" style="; margin-bottom:20px">
+                                                            <textarea name="w3review" id="addrss_ch" rows="4" cols="50" placeholder="Address"></textarea>
+                                                        </div>
+
+                                                        {% if user.is_authenticated %}
+                                                        <input type="hidden" name="passwrd" id="ch_pss" placeholder="Password" />
+                                                        <input type="hidden" name="c_pass" id="ch_con_pass" placeholder="Confirm Password" />
+                                                        {% else %}
+                                                        <div class="email col-md-6">
+                                                            <input type="password" name="passwrd" id="ch_pss" placeholder="Password" />
+                                                        </div>
+                                                        <div class="subject col-md-6">
+                                                            <input type="password" name="c_pass" id="ch_con_pass" placeholder="Confirm Password" />
+                                                        </div>
+                                                        {% endif %}
+
+                                                    </div>
+                                                    <div class="row" style="margin-bottom:20px;">
+                                                        <div class="text col-md-12">
+
+                                                        </div>
+                                                    </div>
+                                                    <b style="color:red;" id="show_error"></b><br>
+                                                    <b>NOTE : We Are Providing Foods in Cash on Delivery !!</b>
+
+                                                    <div style="margin-top:20px;" id="chck_btn">
+                                                        <button class="btn btn-primary" style="background-color:#E48015;" onclick="checkout_func()" type="submit">{% if user.is_authenticated %}Place Order{% else %}Signup and place order{% endif %}</button>
+                                                    </div>
+
+                                            </div>
+                                        </div>
+
+
+
+
+<!--                                        <div class="col-md-4">-->
+<!--                                            <div class="info">-->
+<!--                                                <p>Duis at pharetra neque, ut condimentum, purus nisl pretium quam, in pulvinar velit massa id elit. </p>-->
+<!--                                                <ul>-->
+<!--                                                    <li><i class="fa fa-phone"></i>090-080-0760</li>-->
+<!--                                                    <li><i class="fa fa-globe"></i>456 New Dagon City Studio, Yankinn, Digital Estate</li>-->
+<!--                                                    <li><i class="fa fa-envelope"></i><a href="#">info@company.com</a></li>-->
+<!--                                                </ul>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-12">-->
+<!--                            <div class="heading-section">-->
+<!--                                <h2>Find Us On Map</h2>-->
+<!--                                <img src="{% static '' %}images/under-heading.png" alt="" >-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-12">-->
+<!--                            <div id="googleMap" style="height:340px;"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
+
+
+
+<script>
+
+    var all_cart = "";
+
+    total_price = 0;
+
+    product_cart = JSON.parse(localStorage.getItem('product_cart'));
+    for (var item in product_cart){
+        name = product_cart[item][1];
+        price = product_cart[item][2];
+        img = product_cart[item][3];
+        id_prd = product_cart[item][4];
+
+        total_price = total_price + price;
+
+        all_cart = all_cart + `<div class="recent-post">
+        <div class="recent-post-thumb">
+            <img src="/media/${img}" alt="" style="width:100%">
+        </div>
+        <div class="recent-post-info">
+            <h6><a href="/blog_details/${id_prd}">${name}</a></h6>
+            <span>$ ${price}</span>
+        </div>
+    </div>`
+
+    }
+    document.getElementById('cart_prds').innerHTML = all_cart;
+    document.getElementById('sho_total_price').innerHTML = total_price;
+
+
+
+    function checkout_func(){
+    console.log('clicked')
+        var frs_nam = document.getElementById('frs_nam').value;
+        var ls_nam = document.getElementById('ls_nam').value;
+        var ch_eml = document.getElementById('ch_eml').value;
+        var phn_num = document.getElementById('phn_num').value;
+        var addrss_ch = $("#addrss_ch").val();
+        var ch_pss = document.getElementById('ch_pss').value;
+        var ch_con_pass = document.getElementById('ch_con_pass').value;
+
+        var sho_total_price = document.getElementById('sho_total_price').innerHTML;
+
+        product_cart = JSON.parse(localStorage.getItem('product_cart'));
+        let all_prds_ids = []
+        for (var item in product_cart){
+                all_prds_ids.push(product_cart[item][4]);
+            }
+
+        json_all_prds_ids = JSON.stringify(all_prds_ids)
+
+        console.log(frs_nam, ls_nam, ch_eml, ch_eml, phn_num, addrss_ch, ch_pss, ch_con_pass, all_prds_ids, json_all_prds_ids)
+
+        if (ch_pss == ch_con_pass){
+            document.getElementById('show_error').innerHTML = "";
+            document.getElementById('chck_btn').innerHTML = `<button class="btn btn-primary" style="background-color:#13B045;" type="submit">Placing wait ...</button>`;
+            $.ajax({
+                url : '{% url 'checkout_products' %}',
+                type : 'POST',
+                data : {frs_nam:frs_nam, ls_nam:ls_nam, ch_eml:ch_eml, ch_eml:ch_eml, phn_num:phn_num, addrss_ch:addrss_ch, ch_pss:ch_pss, json_all_prds_ids:json_all_prds_ids, sho_total_price}
+            })
+            .done(function(response){
+            console.log(response)
+
+                if (response == '1'){
+                    document.getElementById('show_error').innerHTML = `MESSAGE : OPS! Email Already Exist !`
+
+
+                    document.getElementById('chck_btn').innerHTML = `<button class="btn btn-primary" style="background-color:#E48015;" onclick="checkout_func()" type="submit">{% if user.is_authenticated %}Place Order{% else %}Signup and place order{% endif %}</button>`
+
+                }
+
+                else{
+                alert('Your Order is Placed !! Your Order ID is ' + response)
+                localStorage.clear();
+                product_cart={};
+                updateCart(product_cart);
+                location.href = '/my_account'
+                }
+            })
+
+        }
+        else{
+            document.getElementById('show_error').innerHTML = `MESSAGE : Your Passwords Are Not Match !`
+        }
+
+
+    }
+
+
+</script>
+
+
+{% endblock %}

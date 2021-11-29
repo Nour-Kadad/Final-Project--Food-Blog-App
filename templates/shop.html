@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+            <div id="products-post">
+                <div class="container">
+
+                            <div style="text-align: center;">
+                                <h2>Hungry ?</h2>
+                                <img src="{% static '' %}images/under-heading.png" alt="">
+                            </div>
+
+
+                    <div class="row" id="Container">
+                        {% for i in all_products %}
+                        <div class="col-md-3 col-sm-6" style="display: inline-block;">
+                            <div class="portfolio-wrapper">
+                                <a href="{% url 'product_detail' i.id %}">
+                                <div class="portfolio-thumb">
+                                    <img src="/media/{{i.img}}" alt="">
+
+                                </div>
+                                <div class="label-text">
+                                    <h3>{{i.Name}}</h3>
+                                    <span class="text-category">$ {{i.Price}}</span>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item ginger" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product2.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product2_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Ginger</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Ginger Tea</a></h3>-->
+<!--                                    <span class="text-category">$24.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item pizza" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product3.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product3_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Pizza</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Fresh Salad</a></h3>-->
+<!--                                    <span class="text-category">$12.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item pasta" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product4.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product4_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Pasta</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Healthy Herbal Tea</a></h3>-->
+<!--                                    <span class="text-category">$8.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item drink" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product5.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product5_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Drink</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Fruit Salad</a></h3>-->
+<!--                                    <span class="text-category">$12.50</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item hamburger" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product6.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product6_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Hamburger</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Spicy Hamburger</a></h3>-->
+<!--                                    <span class="text-category">$7.50</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item pizza" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product7.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product7_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Pizza</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Chocolate Cake</a></h3>-->
+<!--                                    <span class="text-category">$16.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item pasta" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product8.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product8_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Pasta</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Berry Taste</a></h3>-->
+<!--                                    <span class="text-category">$15.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item hamburger" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product3.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product3_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Hamburger</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Onion Grilled</a></h3>-->
+<!--                                    <span class="text-category">$16.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item drink" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product2.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product2_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Drink</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Another Ginger</a></h3>-->
+<!--                                    <span class="text-category">$18.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item ginger" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product1.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product1_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Ginger</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Mocha Coffee</a></h3>-->
+<!--                                    <span class="text-category">$16.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-3 col-sm-6 mix portfolio-item pasta" style="display: inline-block;">-->
+<!--                            <div class="portfolio-wrapper">-->
+<!--                                <div class="portfolio-thumb">-->
+<!--                                    <img src="{% static '' %}images/product6.jpg" alt="">-->
+<!--                                    <div class="hover">-->
+<!--                                        <div class="hover-iner">-->
+<!--                                            <a class="fancybox" href="{% static '' %}images/product6_big.jpg"><img src="{% static '' %}images/open-icon.png" alt=""></a>-->
+<!--                                            <span>Pasta</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="label-text">-->
+<!--                                    <h3><a href="single-post.html">Dessert Time</a></h3>-->
+<!--                                    <span class="text-category">$16.00</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+<!--                    <div class="pagination">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <ul>-->
+<!--                                	<li><a href="#">Previous</a></li>-->
+<!--                                    <li><a href="#">1</a></li>-->
+<!--                                    <li><a href="#">2</a></li>-->
+<!--                                    <li><a href="#">3</a></li>-->
+<!--                                    <li><a href="#">4</a></li>-->
+<!--                                    <li><a href="#">Next</a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
+
+{% endblock %}

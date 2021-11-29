@@ -1,0 +1,130 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Account{% endblock %}
+{% block content %}
+
+
+            <div id="product-post">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading-section">
+                                <h2>Login/SignUp</h2>
+                                <img src="{% static '' %}images/under-heading.png" alt="" >
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contact-us">
+                        <div class="container">
+                            <div class="row">
+                                <div class="product-item col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            {% if erorr_message_2 %}
+                                            <div class="alert alert-danger" role="alert">
+                                              {{erorr_message_2}}
+                                            </div>
+                                            {% endif %}
+                                            <div class="message-form">
+                                                <form action="{% url 'login_func' %}" method="POST" class="send-message">{% csrf_token %}
+                                                    <div class="row">
+                                                    <div class="name col-md-12">
+                                                        <input type="email" name="log_email" value="{{log_email}}" placeholder="Email" />
+                                                    </div>
+                                                    <div class="email col-md-12" style="margin-top:20px;">
+                                                        <input type="password" name="pass_log" placeholder="Password" />
+                                                    </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="text col-md-12">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="send">
+                                                        <button type="submit">Login</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-md-6">
+                                            {% if erorr_message %}
+                                            <div class="alert alert-danger" role="alert">
+                                              {{erorr_message}}
+                                            </div>
+                                            {% endif %}
+                                            <div class="message-form">
+
+                                                <form action="{% url 'signup_form' %}" method="POST" class="send-message">{% csrf_token %}
+                                                    <div class="row">
+                                                    <div class="name col-md-6">
+                                                        <input type="text" name="f_name" placeholder="First Name" value="{{f_name}}" />
+                                                    </div>
+                                                    <div class="email col-md-6">
+                                                        <input type="text" name="l_name" placeholder="Last Name" value="{{l_name}}" />
+                                                    </div>
+                                                    <div class="subject col-md-12" style="margin-top:20px; margin-bottom:20px">
+                                                        <input type="email" name="r_email" placeholder="Email" value="{{r_email}}" />
+                                                    </div>
+
+
+                                                    <div class="email col-md-6">
+                                                        <input type="password" name="passwrd" placeholder="Password" />
+                                                    </div>
+                                                    <div class="subject col-md-6">
+                                                        <input type="password" name="c_pass" placeholder="Confirm Password" />
+                                                    </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="text col-md-12">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="send">
+                                                        <button type="submit">SignUp</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+
+
+
+<!--                                        <div class="col-md-4">-->
+<!--                                            <div class="info">-->
+<!--                                                <p>Duis at pharetra neque, ut condimentum, purus nisl pretium quam, in pulvinar velit massa id elit. </p>-->
+<!--                                                <ul>-->
+<!--                                                    <li><i class="fa fa-phone"></i>090-080-0760</li>-->
+<!--                                                    <li><i class="fa fa-globe"></i>456 New Dagon City Studio, Yankinn, Digital Estate</li>-->
+<!--                                                    <li><i class="fa fa-envelope"></i><a href="#">info@company.com</a></li>-->
+<!--                                                </ul>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-12">-->
+<!--                            <div class="heading-section">-->
+<!--                                <h2>Find Us On Map</h2>-->
+<!--                                <img src="{% static '' %}images/under-heading.png" alt="" >-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-12">-->
+<!--                            <div id="googleMap" style="height:340px;"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
+
+
+{% endblock %}
